@@ -9,7 +9,7 @@ class App extends Component {
 
     this.state = {
     monsters: [],
-    searchField: ''
+    searchField: '',
     };
 }
 
@@ -19,18 +19,15 @@ componentDidMount() {
     .then((users) => 
       this.setState(
         () => {
-      return {monsters: users}
-    },
-    () => {
-    }
+        return {monsters: users}
+      }
   )
   );
 }
 
 onSearchChange =  (event) => {
   const searchField = event.target.value.toLocaleLowerCase();
-  this.setState(
-    () => {
+  this.setState(() => {
       return { searchField }
     }
   )
@@ -39,14 +36,14 @@ onSearchChange =  (event) => {
 render() {
   const { monsters, searchField } = this.state;
   const { onSearchChange } = this;
-  const filteredMonsters = this.state.monsters.filter((monster) => {
-    return monster.name.toLocaleLowerCase().includes(this.state.searchField);
+  const filteredMonsters = monsters.filter((monster) => {
+    return monster.name.toLocaleLowerCase().includes(searchField);
   });
 
     return (
       <div className="App">
         <SearchBox
-          className='search-box'
+          className='monsters-search-box'
           onChangeHandler={onSearchChange}
           placeholder='search monsters' />
         <CardList monsters={filteredMonsters} />
